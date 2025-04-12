@@ -47,30 +47,30 @@ def get_inputs():
         tests.append(Test(nPersons, preferences))
     return tests
 
-def get_max_satisfied(tests):
-    preferences = tests.preferences
+def get_max_satisfied(test):
+    preferences = test.preferences[:]
     beverage = [0] * 3
     maxSatisfied = 0
-    get_max_helper(maxSatisfied, beverage, preferences)
+    return get_max_helper(maxSatisfied, beverage, preferences)
 
 def get_max_helper(maxSatisfied, beverage, remainingPreferences):
     if(len(remainingPreferences) == 0):
         return maxSatisfied
 
-    auxBeverage = beverage
+    auxBeverage = beverage[:]
     a, b, c = remainingPreferences[0]
 
     auxBeverage[0] = max(beverage[0], a)
     auxBeverage[1] = max(beverage[1], b)
     auxBeverage[2] = max(beverage[2], c)
 
-    if(auxBeverage[0] + auxBeverage[1] + auxBeverage[2] > 1000):
+    if(auxBeverage[0] + auxBeverage[1] + auxBeverage[2] > 10000):
         return maxSatisfied
     
     del remainingPreferences[0]
 
-    return max(get_max_helper(maxSatisfied + 1, auxBeverage, remainingPreferences),
-               get_max_helper(maxSatisfied, beverage, remainingPreferences))
+    return max(get_max_helper(maxSatisfied + 1, auxBeverage, remainingPreferences[:]),
+               get_max_helper(maxSatisfied, beverage, remainingPreferences[:]))
 
 
 def main():
