@@ -85,8 +85,7 @@ def get_max_helper(maxSatisfied, beverage, remainingPreferences):
 def main():
     tests = get_inputs()
     print_tests(tests)
-    for test in tests:
-        print(get_max_satisfied(test))
-        print(test.preferences)
+    for i, test in enumerate(tests):
+        print("Caso #", i+1, ": ", get_max_satisfied(test))
 
 main()
